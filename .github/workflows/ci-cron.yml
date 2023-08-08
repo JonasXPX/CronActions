@@ -20,9 +20,10 @@ jobs:
           git config user.name "JonasXPX"
           git config user.email "jonasdefarias@hotmail.com"
           CRON_DATA="${{ secrets.CRON_DATA }}"
+          CRON_BRANCH="feat/$(date +%s)"
           sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
           git add info.data
           git commit -m "Cron changes"
-          git status
-          git push
+          git checkout -b ${CRON_BRANCH}
+          git push -u origin ${CRON_BRANCH}
           
