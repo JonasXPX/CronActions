@@ -17,8 +17,6 @@ jobs:
            token: ${{ secrets.SECRET_REPOSITORY }}
       - name: just run all
         run: |
-          git config user.name "github-action <3"
-          git config user.email "jonasdefarias@hotmail.com"
           CRON_DATA="${{ secrets.CRON_DATA }}"
           CRON_BRANCH="feat/$(date +%s)"
           sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
