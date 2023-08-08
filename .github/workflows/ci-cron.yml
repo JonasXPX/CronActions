@@ -24,9 +24,10 @@ jobs:
           sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
           git add info.data
           git commit -m "Cron changes"
-          git checkout -b ${CRON_BRANCH}
+          git checkout -b changes
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
-           branch: ${{ env.CRON_BRANCH }}
+           branch: changes
+           force: true
