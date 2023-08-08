@@ -27,7 +27,7 @@ jobs:
           git checkout -b ${CRON_BRANCH}
           git push -u origin ${CRON_BRANCH}
       - name: Push changes
-      - uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@master
         with:
            github_token: ${{ secrets.SECRET_REPOSITORY }}
            branch: ${{ github.ref }}
