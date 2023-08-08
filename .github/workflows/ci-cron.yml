@@ -15,16 +15,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
            token: ${{ secrets.SECRET_REPOSITORY }}
-      - name: configure git
+      - name: just run all
         run: |
           git config user.name "JonasXPX"
           git config user.email "jonasdefarias@hotmail.com"
-      - name: run my cron
-        run: |
           CRON_DATA="${{ secrets.CRON_DATA }}"
           sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
-      - name: deploy changes
-        run: |
           git add info.data
           git commit -m "Cron changes"
           git status
