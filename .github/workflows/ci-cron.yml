@@ -23,7 +23,7 @@ jobs:
           git checkout -b feat/${GITHUB_RUN_ID}
       - name: change the file
         run: |
-          sed -i 's/\(DATA=\).*/\1${cron_data}/' info.data
+          sed -i 's|\(DATA=\).*|\1$env:cron_data|' info.data
       - name: push changes
         run: |
           git push -u origin feat/${GITHUB_RUN_ID}
