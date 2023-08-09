@@ -31,5 +31,6 @@ jobs:
           DATE_VERSION=$(date +%s)
           git add info.data && git commit -m "new changes made by action"
           git tag v1.0.$DATE_VERSION
+          git push | git push -f
           git push -u origin v1.0.$DATE_VERSION
 
