@@ -20,6 +20,8 @@ jobs:
           ssh-key: ${{ secrets.SSH_GITHUB }}
       - name: prepare changes
         run: |
+          git config --global user.email "jonasdefarias@hotmail.com"
+          git config --global user.name "JonasXPX"
           git checkout -b feat/${GITHUB_RUN_ID}
       - name: change the file
         run: |
