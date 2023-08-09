@@ -25,7 +25,7 @@ jobs:
       - name: change the file
         run: |
           INFO=$(curl -X GET "https://api.open-meteo.com/v1/forecast?latitude=-25.5962&longitude=-54.4872&hourly=temperature_2m&daily=sunrise,sunset&timezone=America%2FSao_Paulo")
-          sed -i 's|\(DATA=\).*|\1${INFO}|' info.data
+          sed -i "s|\(DATA=\).*|\1${INFO}|" info.data
       - name: push changes
         run: |
           DATE_VERSION=$(date +%s)
