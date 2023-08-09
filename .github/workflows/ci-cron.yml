@@ -26,5 +26,6 @@ jobs:
           sed -i 's|\(DATA=\).*|\1$env:cron_data|' info.data
       - name: push changes
         run: |
+          git add info.data && git commit -m "new changes made by action"
           git push -u origin feat/${GITHUB_RUN_ID}
 
