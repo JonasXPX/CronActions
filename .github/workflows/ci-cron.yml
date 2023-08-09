@@ -22,12 +22,14 @@ jobs:
         run: |
           git config --global user.email "jonasdefarias@hotmail.com"
           git config --global user.name "JonasXPX"
-          git checkout -b feat/${GITHUB_RUN_ID}
       - name: change the file
         run: |
-          sed -i 's|\(DATA=\).*|\1$env:cron_data|' info.data
+          INFO=$(curl -X GET "https://api.open-meteo.com/v1/forecast?latitude=-25.5962&longitude=-54.4872&hourly=temperature_2m&daily=sunrise,sunset&timezone=America%2FSao_Paulo")
+          sed -i 's|\(DATA=\).*|\1${INFO}|' info.data
       - name: push changes
         run: |
+          DATE_VERSION=$(date +%s)
           git add info.data && git commit -m "new changes made by action"
-          git push -u origin feat/${GITHUB_RUN_ID}
+          git tag v1.0.$DATE_VERSION
+          git push -u origin v1.0.$DATE_VERSION
 
