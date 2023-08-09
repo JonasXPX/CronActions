@@ -13,15 +13,11 @@ jobs:
     environment: local
     steps:
       - uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.SECRET_REPOSITORY }}
       - name: general
         run: |
-          echo "TEST" > file.json
-  finish:
-    runs-on: ubuntu-latest
-    environment: local
-    needs: build
-    steps:
-       - name: general continue
-         run: |
-            cat file.json
-          
+          O_DATE=$(data +%s)
+          git checkout -b feat/${O_DATE}
+          git push -u origin feat/${O_DATE}
+
