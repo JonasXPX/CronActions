@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu:latest
     environment: local
     steps:
       - uses: actions/checkout@v3
