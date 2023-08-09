@@ -6,7 +6,6 @@ on:
     branches: [main]
   schedule:
     - cron: "* */2 * * *"
-  
 
   workflow_dispatch:
 jobs:
@@ -17,9 +16,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ssh-key: ${{ secrets.SSH_GITHUB }}
-      - name: general
+      - name: prepare changes
         run: |
           O_DATE=$(date +%s)
+          CRON_DATA=${{ vars.CRON_DATA }}
           git checkout -b feat/${O_DATE}
+      - name: change the file
+        run: |
+          sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
+      - name: push changes
+        run: |
           git push -u origin feat/${O_DATE}
 
