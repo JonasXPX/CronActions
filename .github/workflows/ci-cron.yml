@@ -16,7 +16,10 @@ jobs:
         with:
            token: ${{ secrets.SECRET_REPOSITORY }}
       - name: configure github ssh
-        run: ~/ssh/.id_rsa < ${{ secrets.SSH_GITHUB }}
+        run: |
+          echo ${{ secrets.SSH_GITHUB }} > ~/.ssh/.github_actions
+          chmod 600 ~/.ssh/github_actions
+          ssh-add ~/.ssh/github_actions
       - name: just run all
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
