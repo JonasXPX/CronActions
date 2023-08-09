@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
 env:
  cron_data: ${{ vars.CRON_DATA }}
- o_date: $(date +%s)
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,11 +20,11 @@ jobs:
           ssh-key: ${{ secrets.SSH_GITHUB }}
       - name: prepare changes
         run: |
-          git checkout -b feat/${O_DATE}
+          git checkout -b feat/${GITHUB_RUN_ID}
       - name: change the file
         run: |
           sed -i 's/\(DATA=\).*/\1${cron_data}/' info.data
       - name: push changes
         run: |
-          git push -u origin feat/${O_DATE}
+          git push -u origin feat/${GITHUB_RUN_ID}
 
