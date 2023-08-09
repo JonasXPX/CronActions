@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ssh-key: ${{ secrets.SECRET_REPOSITORY }}
+          ssh-key: ${{ secrets.SSH_GITHUB }}
       - name: general
         run: |
           O_DATE=$(data +%s)
