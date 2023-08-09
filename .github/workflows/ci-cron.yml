@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 env:
  cron_data: ${{ vars.CRON_DATA }}
+ o_date: $(date +%s)
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +21,6 @@ jobs:
           ssh-key: ${{ secrets.SSH_GITHUB }}
       - name: prepare changes
         run: |
-          O_DATE=$(date +%s)
           git checkout -b feat/${O_DATE}
       - name: change the file
         run: |
