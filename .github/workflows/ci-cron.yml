@@ -8,6 +8,8 @@ on:
     - cron: "* */2 * * *"
 
   workflow_dispatch:
+env:
+ cron_data: ${{ vars.CRON_DATA }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,11 +21,10 @@ jobs:
       - name: prepare changes
         run: |
           O_DATE=$(date +%s)
-          CRON_DATA=${{ vars.CRON_DATA }}
           git checkout -b feat/${O_DATE}
       - name: change the file
         run: |
-          sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
+          sed -i 's/\(DATA=\).*/\1${cron_data}/' info.data
       - name: push changes
         run: |
           git push -u origin feat/${O_DATE}
