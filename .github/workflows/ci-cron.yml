@@ -4,6 +4,8 @@ name: CI
 on:
   schedule:
     - cron: "* */2 * * *"
+  push:
+    [main]
   
 
   workflow_dispatch:
