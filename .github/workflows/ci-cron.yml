@@ -13,21 +13,15 @@ jobs:
     environment: local
     steps:
       - uses: actions/checkout@v3
-        with:
-           token: ${{ secrets.SECRET_REPOSITORY }}
-      - name: configure github ssh
+      - name: general
         run: |
-          echo ${{ secrets.SSH_GITHUB }} > ~/.ssh/.github_actions
-          chmod 600 ~/.ssh/github_actions
-          ssh-add ~/.ssh/github_actions
-      - name: just run all
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          CRON_DATA="${{ secrets.CRON_DATA }}"
-          CRON_BRANCH="feat/$(date +%s)"
-          sed -i 's/\(DATA=\).*/\1${CRON_DATA}/' info.data
-          git add info.data
-          git commit -m "Cron changes"
-          git checkout -b changes
-          git push -u origin changes
+          echo "TEST" > file.json
+  finish:
+    runs-on: ubuntu-latest
+    environment: local
+    needs: build
+    steps:
+       - name: general continue
+         run: |
+            cat file.json
+          
