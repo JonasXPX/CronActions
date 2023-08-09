@@ -19,7 +19,7 @@ jobs:
           ssh-key: ${{ secrets.SSH_GITHUB }}
       - name: general
         run: |
-          O_DATE=$(data +%s)
+          O_DATE=$(date +%s)
           git checkout -b feat/${O_DATE}
           git push -u origin feat/${O_DATE}
 
