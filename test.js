@@ -1,2 +1,3 @@
 const test = 3;
-console.log(test);
+const newValue = 50;
+console.log(test, 50);
